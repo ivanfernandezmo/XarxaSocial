@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Login</title>
-    <link rel="icon" href="imatges/montanas.png" type="image/x-icon">
+    <link rel="icon" href="logos/faviconOcell.png" type="image/x-icon">
     <style>
         /* Asegura que el body ocupe todo el alto y el ancho de la pantalla */
         html, body {
@@ -24,6 +24,16 @@
             background-repeat: no-repeat; /* No repite la imagen */
             background-attachment: fixed; /* La imagen se mantiene fija al hacer scroll */
         }
+
+        .login-image {
+            width: 100%;  /* La imagen ocupará el 100% del ancho del contenedor */
+            height: auto;  /* La altura será ajustada proporcionalmente */
+            max-width: 200px; /* Limitar la imagen a un tamaño máximo */
+            margin-bottom: 20px; /* Espacio debajo de la imagen */
+            display: block;
+            margin-left: auto;
+            margin-right: auto; /* Centrar la imagen */
+}
 
         .login-container {
             background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semitransparente */
@@ -100,6 +110,7 @@
 </head>
 <body>
     <div class="login-container">
+    <img src="logos/sinfondo.png" alt="Imagen de inicio" class="login-image">
         <h2>Iniciar sessió</h2>
         <form action="/login" method="POST">
             <input type="text" name="username" class="form-input" placeholder="Usuari o correu electrònic" required>

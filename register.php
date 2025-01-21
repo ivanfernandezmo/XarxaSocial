@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
+    <link rel="icon" href="logos/faviconOcell.png" type="image/x-icon">
     <style>
         /* Estilos generales */
         * {
@@ -55,10 +56,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             flex: 1;
             background-color: #ffffff;
             display: flex;
-            justify-content: center;
+            justify-content: right;
             align-items: center;
             padding: 20px;
-            background-color: rgb(248, 218, 238);
+            background-color: #f4ddcb;
         }
 
         /* Contenedor del formulario de registro */
@@ -132,9 +133,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         .image-container {
             flex: 1;
             background-image: url('imatges/sign-post-5655110_1280.webp'); /* Ruta de la imagen */
-            background-size: cover;
-            background-position: center;
+            background-size: contain;
+            background-position: left;
             background-repeat: no-repeat;
+            background-color: #f4ddcb;
             height: 100vh; /* Asegura que ocupe toda la altura de la ventana */
         }
 
