@@ -3,25 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Login</title>
+    <link rel="icon" href="imatges/montanas.png" type="image/x-icon">
     <style>
+        /* Asegura que el body ocupe todo el alto y el ancho de la pantalla */
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
         body {
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f4f4f4;
+            background-image: url('imatges/mountains-1412683_1280.webp'); /* Ruta de la imagen */
+            background-size: cover; /* La imagen cubre toda la pantalla */
+            background-position: center; /* Centra la imagen */
+            background-repeat: no-repeat; /* No repite la imagen */
+            background-attachment: fixed; /* La imagen se mantiene fija al hacer scroll */
         }
 
         .login-container {
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semitransparente */
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 400px; /* El máximo tamaño del contenedor */
+            max-width: 400px; /* Tamaño máximo */
             box-sizing: border-box;
         }
 
@@ -48,7 +58,7 @@
         .login-btn {
             width: 100%;
             padding: 10px;
-            background-color: #007bff;
+            background-color:rgb(188, 73, 163);
             color: white;
             border: none;
             border-radius: 5px;
@@ -90,11 +100,11 @@
 </head>
 <body>
     <div class="login-container">
-        <h2>Iniciar sessió</h2>
+        <h2>Iniciar sesión</h2>
         <form action="/login" method="POST">
-            <input type="text" name="username" class="form-input" placeholder="Usuari o correu electrònic" required>
-            <input type="password" name="password" class="form-input" placeholder="Contrasenya" required>
-            <button type="submit" class="login-btn">Iniciar sessió</button>
+            <input type="text" name="username" class="form-input" placeholder="Usuario o correo electrónico" required>
+            <input type="password" name="password" class="form-input" placeholder="Contraseña" required>
+            <button type="submit" class="login-btn">Iniciar sesión</button>
         </form>
         <div class="register-link">
             <p>Encara no tens compte? <a href="/registro">Crea un compte</a></p>
