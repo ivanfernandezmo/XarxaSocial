@@ -60,6 +60,22 @@
             background-color: #0056b3;
         }
 
+        .register-link {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .register-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
         /* Media query para pantallas pequeñas */
         @media (max-width: 600px) {
             .login-container {
@@ -74,12 +90,15 @@
 </head>
 <body>
     <div class="login-container">
-        <h2>Iniciar sesión</h2>
+        <h2>Iniciar sessió</h2>
         <form action="/login" method="POST">
-            <input type="text" name="username" class="form-input" placeholder="Usuario o correo electrónico" required>
-            <input type="password" name="password" class="form-input" placeholder="Contraseña" required>
-            <button type="submit" class="login-btn">Iniciar sesión</button>
+            <input type="text" name="username" class="form-input" placeholder="Usuari o correu electrònic" required>
+            <input type="password" name="password" class="form-input" placeholder="Contrasenya" required>
+            <button type="submit" class="login-btn">Iniciar sessió</button>
         </form>
+        <div class="register-link">
+            <p>Encara no tens compte? <a href="/registro">Crea un compte</a></p>
+        </div>
     </div>
 </body>
 </html>
