@@ -1,3 +1,4 @@
+<?php require_once('connecta_db.php'); ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -112,7 +113,7 @@
     <div class="login-container">
     <img src="logos/sinfondo.png" alt="Imagen de inicio" class="login-image">
         <h2>Iniciar sessió</h2>
-        <form action="/login" method="POST">
+        <form action="existeixuser.php" method="POST">
             <input type="text" name="username" class="form-input" placeholder="Usuari o correu electrònic" required>
             <input type="password" name="password" class="form-input" placeholder="Contrassenya" required>
             <button type="submit" class="login-btn">Iniciar sesión</button>
