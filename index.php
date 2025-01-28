@@ -113,11 +113,13 @@
     <div class="login-container">
     <img src="logos/sinfondo.png" alt="Imagen de inicio" class="login-image">
         <h2>Iniciar sessió</h2>
-<<<<<<< Updated upstream
+        
+        <!-- Mostrar el error si existe -->
+        <?php if (isset($_GET['error'])): ?>
+            <p style="color:red;"><?php echo $_GET['error'] == 'usuario_no_encontrado' ? 'Usuario o contraseña incorrectos.' : 'Por favor, completa todos los campos.'; ?></p>
+        <?php endif; ?>
+
         <form action="existeixuser.php" method="POST">
-=======
-        <form action="home.php" method="POST">
->>>>>>> Stashed changes
             <input type="text" name="username" class="form-input" placeholder="Usuari o correu electrònic" required>
             <input type="password" name="password" class="form-input" placeholder="Contrassenya" required>
             <button type="submit" class="login-btn">Iniciar sesión</button>

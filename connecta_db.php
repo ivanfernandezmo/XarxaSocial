@@ -1,5 +1,5 @@
 <?php
-$cadena_connexio = 'mysql:dbname=phpmyadmin;host=localhost:3335';
+$cadena_connexio = 'mysql:dbname=xarxasocial;host=localhost:3335';
 $usuari = 'root';
 $passwd = '';
 try {
@@ -11,7 +11,7 @@ try {
         // echo '<pre>';
         // echo "Connexió establerta! \n ";
         // echo '</pre>';
-        echo 'Connexió establerta!<br>';
+        //echo 'Connexió establerta!<br>';
     }
 
 } catch (PDOException $e) {
