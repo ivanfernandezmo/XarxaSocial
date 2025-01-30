@@ -1,4 +1,5 @@
 <?php
+require_once('connecta_db.php');
 // Iniciar la sesión si no lo has hecho antes (opcional, dependiendo de tus necesidades)
 session_start();
 
@@ -11,9 +12,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $lastName = trim($_POST['lastName']);
     $password = $_POST['password'];
     $hash = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
-
     $verifyPassword = $_POST['verifyPassword'];
     
+
+    $sql = 'INSERT INTO usuario (mail, username, passHash, userFirstName, userLastName, creationDate, removeDate, lastSignIn, active)
+     values("'.$email.'","'.$username.'","'.$hash.'","'.$firstName.'","'.$lastName.'","'.date("Y/m/d H:i:s").'","'.NULL.'","'.NULL.'",1)' ;
+    $db->query($sql);
+
 
     // Validaciones básicas
     if (empty($username) || empty($email) || empty($password) || $password !== $verifyPassword) {

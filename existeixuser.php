@@ -6,27 +6,28 @@
     if (isset($_POST['username']) && isset($_POST['password'])) {
         $usuari = $_POST['username'];
         $password = $_POST['password'];
-
+        // $hash = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
         // Consulta SQL para verificar si el usuario existe
-        $sql = "SELECT * FROM usuario WHERE username = :username AND passHash = :password AND active = 1";
-        $stmt = $db->prepare($sql);
+        // $sql = 'SELECT * FROM usuario WHERE username ='".$usuari."' AND active = 1';
+        $sql = 'SELECT passHash FROM usuario where username = "' . $usuari . '"AND active = 1';
+        $return = $db->query($sql);
         $validat = false;
 
-        foreach($sql as $fila){
+        foreach($return as $fila){
             if(password_verify($password,$fila["passHash"])){
                 $validat = true;
             }
         }
         
         // Vinculamos los parámetros para evitar SQL Injection
-        $stmt->bindParam(':username', $usuari, PDO::PARAM_STR);
-        $stmt->bindParam(':password', $password, PDO::PARAM_STR);
+        $return->bindParam(':username', $usuari, PDO::PARAM_STR);
+        $return->bindParam(':password', $password, PDO::PARAM_STR);
 
         // Ejecutamos la consulta
-        $stmt->execute();
+        //$return->execute();
 
         // Verificar si se encontró el usuario
-        if ($stmt->rowCount() > 0) {
+        if ($return->rowCount() > 0 AND $validat==true) {
             session_start();
             $_SESSION['usuari'] = $usuari;
             $_SESSION['password'] = $password;
