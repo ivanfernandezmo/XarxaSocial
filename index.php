@@ -1,4 +1,11 @@
-<?php require_once('connecta_db.php'); ?>
+<?php require_once('connecta_db.php'); 
+
+session_start();
+if(isset($_SESSION['usuari'])){
+    header("Location: home.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -115,7 +122,8 @@
         <h2>Iniciar sessió</h2>
         
         <!-- Mostrar el error si existe -->
-        <?php if (isset($_GET['error'])): ?>
+        <?php 
+        if (isset($_GET['error'])): ?>
             <p style="color:red;"><?php echo $_GET['error'] == 'usuario_no_encontrado' ? 'Usuario o contraseña incorrectos.' : 'Por favor, completa todos los campos.'; ?></p>
         <?php endif; ?>
 

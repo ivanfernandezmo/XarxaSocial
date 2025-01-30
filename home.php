@@ -65,7 +65,7 @@
     <p>Estàs autenticat correctament.</p>
     
 </div>
-<div><a href="index.php" class="logout-btn">Tancar sessió</a></div>
+<div><a href="logout.php" class="logout-btn">Tancar sessió</a></div>
 
 </body>
 </html>

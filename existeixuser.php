@@ -10,6 +10,13 @@
         // Consulta SQL para verificar si el usuario existe
         $sql = "SELECT * FROM usuario WHERE username = :username AND passHash = :password AND active = 1";
         $stmt = $db->prepare($sql);
+        $validat = false;
+
+        foreach($sql as $fila){
+            if(password_verify($password,$fila["passHash"])){
+                $validat = true;
+            }
+        }
         
         // Vinculamos los parámetros para evitar SQL Injection
         $stmt->bindParam(':username', $usuari, PDO::PARAM_STR);

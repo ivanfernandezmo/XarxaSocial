@@ -10,7 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $firstName = trim($_POST['firstName']);
     $lastName = trim($_POST['lastName']);
     $password = $_POST['password'];
+    $hash = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
+
     $verifyPassword = $_POST['verifyPassword'];
+    
 
     // Validaciones básicas
     if (empty($username) || empty($email) || empty($password) || $password !== $verifyPassword) {
