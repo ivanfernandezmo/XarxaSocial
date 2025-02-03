@@ -5,7 +5,7 @@ session_start();
 
 // Aquí puedes agregar tu lógica PHP para procesar el formulario (guardar en la base de datos, validar, etc.)
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Validar los datos y procesar el registro
+    // Validar dades i processar registre
     $username = trim($_POST['username']);
     $email = trim($_POST['email']);
     $firstName = trim($_POST['firstName']);
@@ -16,17 +16,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
 
     $sql = 'INSERT INTO usuario (mail, username, passHash, userFirstName, userLastName, creationDate, removeDate, lastSignIn, active)
-     values("'.$email.'","'.$username.'","'.$hash.'","'.$firstName.'","'.$lastName.'","'.date("Y/m/d H:i:s").'","'.NULL.'","'.NULL.'",1)' ;
+    values("'.$email.'","'.$username.'","'.$hash.'","'.$firstName.'","'.$lastName.'","'.date("Y/m/d H:i:s").'","'.NULL.'","'.NULL.'",1)' ;
     $db->query($sql);
 
 
     // Validaciones básicas
     if (empty($username) || empty($email) || empty($password) || $password !== $verifyPassword) {
-        // Mostrar errores si algún campo obligatorio está vacío o las contraseñas no coinciden
         $error = "Si us plau, completa tots els camps obligatoris.";
     } else {
-        // Aquí puedes agregar el código para guardar el usuario en la base de datos.
-        // Asegúrate de usar medidas de seguridad como el hash de contraseñas (password_hash()).
         $success = "Registre realitzat amb èxit. Ara pots inicar sessió.";
     }
 }
@@ -168,7 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
 
-    <!-- Contenedor principal de dos columnas -->
+    
     <div class="form-container">
         <div class="register-container">
             <h2>Crea un compte</h2>
@@ -192,7 +189,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </div>
 
-    <!-- Contenedor de la derecha (imagen) -->
+    
     <div class="image-container"></div>
 
 </body>
