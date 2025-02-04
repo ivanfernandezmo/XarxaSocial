@@ -1,6 +1,6 @@
-<?php require_once('connecta_db.php'); 
+<?php require_once('connecta_db.php'); //executem la connexio
 
-session_start();
+session_start();//iniciem una sessio
 if(isset($_SESSION['usuari'])){
     header("Location: home.php");
 }
@@ -124,7 +124,7 @@ if(isset($_SESSION['usuari'])){
         <!-- Mostrar el error si existe -->
         <?php 
         if (isset($_GET['error'])): ?>
-            <p style="color:red;"><?php echo $_GET['error'] == 'usuario_no_encontrado' ? 'Usuario o contraseña incorrectos.' : 'Por favor, completa todos los campos.'; ?></p>
+            <p style="color:red;"><?php echo $_GET['error'] == 'usuario_no_encontrado' ? 'Usuari o contrasenya incorrectes.' : 'Siusplau, completa tots els camps.'; ?></p>
         <?php endif; ?>
 
         <form action="existeixuser.php" method="POST">

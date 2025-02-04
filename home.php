@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    // Si no hay sesión activa, redirigir al login
+    // si no hi ha usuari o password redirigim al login
     if (!isset($_SESSION['usuari']) || !isset($_SESSION['password'])) {
         header("Location: index.php");
         exit();
