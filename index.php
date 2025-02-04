@@ -124,13 +124,13 @@ if(isset($_SESSION['usuari'])){
         <!-- Mostrar el error si existe -->
         <?php 
         if (isset($_GET['error'])): ?>
-            <p style="color:red;"><?php echo $_GET['error'] == 'usuario_no_encontrado' ? 'Usuari o contrasenya incorrectes.' : 'Siusplau, completa tots els camps.'; ?></p>
+            <p style="color:red;"><?php echo $_GET['error'] == 'usuario_no_encontrado' ? 'Registre incorrecte.' : 'Siusplau, completa tots els camps.'; ?></p>
         <?php endif; ?>
 
         <form action="existeixuser.php" method="POST">
             <input type="text" name="username" class="form-input" placeholder="Usuari o correu electrònic" required>
             <input type="password" name="password" class="form-input" placeholder="Contrassenya" required>
-            <button type="submit" class="login-btn">Iniciar sesión</button>
+            <button type="submit" class="login-btn">Iniciar sessió</button>
         </form>
         <div class="link-registre">
             <p>Encara no tens compte? <a href="register.php">Crea un compte</a></p>

@@ -3,7 +3,7 @@ require_once('connecta_db.php');
 // Iniciar la sesión si no lo has hecho antes (opcional, dependiendo de tus necesidades)
 session_start();
 
-// Aquí puedes agregar tu lógica PHP para procesar el formulario (guardar en la base de datos, validar, etc.)
+// Processar formulari
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Validar dades i processar registre
     $username = trim($_POST['username']);
