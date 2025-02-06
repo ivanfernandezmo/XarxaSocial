@@ -14,17 +14,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $hash = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
     $verifyPassword = $_POST['verifyPassword'];
     
+    $sql_comprobar = 'SELECT * from usuario where username = "'.$username.'" or mail = "'.$email.'"';
+    $return = $db->query($sql_comprobar);
 
-    $sql = 'INSERT INTO usuario (mail, username, passHash, userFirstName, userLastName, creationDate, removeDate, lastSignIn, active)
-    values("'.$email.'","'.$username.'","'.$hash.'","'.$firstName.'","'.$lastName.'","'.date("Y/m/d H:i:s").'","'.NULL.'","'.NULL.'",1)' ;
-    $db->query($sql);
-
-
-    // Validaciones básicas
-    if (empty($username) || empty($email) || empty($password) || $password !== $verifyPassword) {
-        $error = "Si us plau, completa tots els camps obligatoris.";
-    } else {
-        $success = "Registre realitzat amb èxit. Ara pots inicar sessió.";
+    if($return->rowCount() > 0){
+        $error = "L''usuari o mail ja estàn donats d'alta.";
+    }else if($password !== $verifyPassword){
+        $error = "Les contrassenyes no son iguals.";
+    }else{
+        $sql = 'INSERT INTO usuario (mail, username, passHash, userFirstName, userLastName, creationDate, removeDate, lastSignIn, active)
+        values("'.$email.'","'.$username.'","'.$hash.'","'.$firstName.'","'.$lastName.'","'.date("Y/m/d H:i:s").'","'.NULL.'","'.NULL.'",1)' ;
+        $db->query($sql);
     }
 }
 ?>
