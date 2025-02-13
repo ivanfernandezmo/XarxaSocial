@@ -1,10 +1,11 @@
 <?php
 require_once('connecta_db.php');
-// Iniciar la sesión si no lo has hecho antes (opcional, dependiendo de tus necesidades)
+// use PHPMailer\PHPMailer\PHPMailer;
+// require 'vendor/autoload.php';
 session_start();
 
 // Processar formulari
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'])) {
     // Validar dades i processar registre
     $username = trim($_POST['username']);
     $email = trim($_POST['email']);
@@ -22,10 +23,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }else if($password !== $verifyPassword){
         $error = "Les contrassenyes no son iguals.";
     }else{
-        $sql = 'INSERT INTO usuario (mail, username, passHash, userFirstName, userLastName, creationDate, removeDate, lastSignIn, active)
-        values("'.$email.'","'.$username.'","'.$hash.'","'.$firstName.'","'.$lastName.'","'.date("Y/m/d H:i:s").'","'.NULL.'","'.NULL.'",1)' ;
+        // Generar codi d'activació amb SHA-256
+        $randomBytes = random_bytes(32); // 32 bytes = 256 bits
+        $activationCode = hash('sha256', $randomBytes);
+
+        $sql = 'INSERT INTO usuario (mail, username, passHash, userFirstName, userLastName, creationDate, removeDate, lastSignIn, active, activationDate, activationCode)
+        values("'.$email.'","'.$username.'","'.$hash.'","'.$firstName.'","'.$lastName.'","'.date("Y/m/d H:i:s").'","'.NULL.'","'.NULL.'",0,"'.date("Y/m/d H:i:s").'","'.$activationCode.'")' ;
         $db->query($sql);
     }
+
 }
 ?>
 
@@ -174,7 +180,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <?php elseif (!empty($success)): ?>
                 <p class="success"><?php echo $success; ?></p>
             <?php endif; ?>
-            <form action="register.php" method="POST">
+            <form action="./mailing/mail.php" method="POST">
                 <input type="text" name="username" class="form-input" placeholder="Nom d'usuari" required>
                 <input type="email" name="email" class="form-input" placeholder="Email" required>
                 <input type="text" name="firstName" class="form-input" placeholder="Nom">

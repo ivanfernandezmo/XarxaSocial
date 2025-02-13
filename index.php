@@ -5,6 +5,19 @@ if(isset($_SESSION['usuari'])){
     header("Location: home.php");
 }
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['usuari'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    if (!empty($email) && !empty($password)) {
+        $_SESSION['username'] = $email;
+        $_SESSION['password'] = $password;
+        header('Location: mail.php');
+        exit();
+    } else {
+        $error = 'Escriu la informació:';
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
