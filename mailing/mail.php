@@ -3,6 +3,7 @@ session_start();
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require 'vendor/autoload.php';
+require_once('../connecta_db.php');
 $error = '';
 $text = '';
 $success = ''; 
@@ -14,7 +15,15 @@ $success = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'])) {
     $to_email = $_POST['email'];
     $username = $_POST['username'];
-
+    $sql = 'SELECT activationCode FROM usuario WHERE username = "'.$username.'" and mail = "'.$to_email.'"';
+    $codiActivacio = $db->query($sql);
+    echo $codiActivacio; // Comprobar el codi de activacio
+    $body = '<h1> Correu de verificació</h1>
+    <p> Benvingut a Arctic Tern </p>
+    <img src="../logos/logoLila.png" alt="Logo Arctic Tern" width="100" height="100">
+    <p>Per poder disfrutar de la nostra xarxa social de viatges verifica el teu compte fent clic al següent botó:</p>
+    <p> <a href="mailCheckAccounnt.php?code='.$codiActivacio.'&email='.$to_email.'">Activa el teu compte</a></p>
+    <p>Si no has creat un compte, ignora aquest correu.</p>';
     if (!empty($to_email) && !empty($username)) {
         $mail = new PHPMailer(true);
         try {
@@ -29,8 +38,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'])) {
             // Configuración del correo
             $mail->setFrom('ivan.fernandezm@educem.net', 'Arctic Tern');
             $mail->addAddress($to_email, $username);   // Correo del destinatario
-            $mail->Subject = 'hola';
-            $mail->Body    = 'Benvingut '.$username. ' aquest es el teu link d\'activació.';
+            $mail->Subject = 'Mail de verificació';
+            $mail->IsHTML(true);
+            $mail->Body = $body;
+            
             $mail->send();
             $text = 'Correu enviat';
         } catch (Exception $e) {
@@ -59,5 +70,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'])) {
         <p>S'ha enviat el correu de verificació al teu mail.</p>
         <button type="submit" name="send_mail">Tornar a la pàgina principal</button>
     </form>
+    
+    <h1> Correu de verificació</h1>
+    <p> Benvingut a Arctic Tern </p>
+    <img src="../logos/logoLila.png" alt="Logo Arctic Tern" width="100" height="100">
+    <p>Per poder disfrutar de la nostra xarxa social de viatges verifica el teu compte fent clic al següent botó:</p>
+    <p> <a href="mailCheckAccounnt.php?code=<?= $codiActivacio ?>&email=<?= $to_email ?>">Activa el teu compte</a></p>
+    <p>Si no has creat un compte, ignora aquest botó.</p>
+
+
+    
 </body>
 </html>

@@ -32,6 +32,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'])) {
         $db->query($sql);
     }
 
+    if(isset($username) && !isset($error))
+    {
+        header("Location: ./mailing/mail.php");
+    }
 }
 ?>
 
@@ -180,7 +184,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'])) {
             <?php elseif (!empty($success)): ?>
                 <p class="success"><?php echo $success; ?></p>
             <?php endif; ?>
-            <form action="./mailing/mail.php" method="POST">
+            <form action="register.php" method="POST">
                 <input type="text" name="username" class="form-input" placeholder="Nom d'usuari" required>
                 <input type="email" name="email" class="form-input" placeholder="Email" required>
                 <input type="text" name="firstName" class="form-input" placeholder="Nom">
