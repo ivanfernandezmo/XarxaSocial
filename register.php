@@ -29,12 +29,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'])) {
 
         $sql = 'INSERT INTO usuario (mail, username, passHash, userFirstName, userLastName, creationDate, removeDate, lastSignIn, active, activationDate, activationCode)
         values("'.$email.'","'.$username.'","'.$hash.'","'.$firstName.'","'.$lastName.'","'.date("Y/m/d H:i:s").'","'.NULL.'","'.NULL.'",0,"'.date("Y/m/d H:i:s").'","'.$activationCode.'")' ;
-        $db->query($sql);
+        $insert = $db->query($sql);
+        echo '<p>Files Inserides: ' . $insert->rowCount() . '</p>';
     }
 
-    if(isset($username) && !isset($error))
+    if($insert)
     {
-        header("Location: ./mailing/mail.php");
+        $_SESSION['activationCode'] = $activationCode;
+        $_SESSION['email'] = $email; //$_SESSION['mail']
+        $_SESSION['username'] = $username;
+        header("Location: http://localhost/XarxaSocial/XarxaSocial/mailing/mail.php");
     }
 }
 ?>

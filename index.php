@@ -132,6 +132,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['usuari'])) {
 <body>
     <div class="login-container">
     <img src="logos/sinfondo.png" alt="Imagen de inicio" class="login-image">
+        <?php 
+        if ($_SESSION['validacio'] == true): ?>
+            <p style="color:Blue;"><?php echo 'Compte validat correctament.' ?></p>
+        <?php
+        else: ?>
+        <p style="color:Red;"><?php echo 'Error en la validació del compte.' ?></p>
+        <?php endif; ?>
         <h2>Iniciar sessió</h2>
         
         <!-- Mostrar el error si existe -->
@@ -139,6 +146,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['usuari'])) {
         if (isset($_GET['error'])): ?>
             <p style="color:red;"><?php echo $_GET['error'] == 'usuario_no_encontrado' ? 'Registre incorrecte.' : 'Siusplau, completa tots els camps.'; ?></p>
         <?php endif; ?>
+
+        
+        
 
         <form action="existeixuser.php" method="POST">
             <input type="text" name="username" class="form-input" placeholder="Usuari o correu electrònic" required>

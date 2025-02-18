@@ -12,17 +12,17 @@ $success = '';
 //     exit();
 // }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'])) {
-    $to_email = $_POST['email'];
-    $username = $_POST['username'];
-    $sql = 'SELECT activationCode FROM usuario WHERE username = "'.$username.'" and mail = "'.$to_email.'"';
-    $codiActivacio = $db->query($sql);
-    echo $codiActivacio; // Comprobar el codi de activacio
+if (isset($_SESSION['email'])) {
+    $to_email = $_SESSION['email'];
+    $username = $_SESSION['username'];
+    
+    $codiActivacio = $_SESSION['activationCode'];
+    
     $body = '<h1> Correu de verificació</h1>
     <p> Benvingut a Arctic Tern </p>
     <img src="../logos/logoLila.png" alt="Logo Arctic Tern" width="100" height="100">
     <p>Per poder disfrutar de la nostra xarxa social de viatges verifica el teu compte fent clic al següent botó:</p>
-    <p> <a href="mailCheckAccounnt.php?code='.$codiActivacio.'&email='.$to_email.'">Activa el teu compte</a></p>
+    <p> <a href="mailCheckAccount.php?code='.$codiActivacio.'&email='.$to_email.'">Activa el teu compte</a></p>
     <p>Si no has creat un compte, ignora aquest correu.</p>';
     if (!empty($to_email) && !empty($username)) {
         $mail = new PHPMailer(true);
