@@ -24,11 +24,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['usuari'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>Login</title>
     <link rel="icon" href="logos/faviconOcell.png" type="image/x-icon">
+
+    <!-- Bootstrap CSS para el Pop-up -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
-        /* Asegura que el body ocupe todo el alto y el ancho de la pantalla */
+        /* Estilos generales */
         html, body {
             height: 100%;
             margin: 0;
@@ -39,30 +42,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['usuari'])) {
             display: flex;
             justify-content: center;
             align-items: center;
-            background-image: url('imatges/mountains-1412683_1280.webp'); /* Ruta de la imagen */
-            background-size: cover; /* La imagen cubre toda la pantalla */
-            background-position: center; /* Centra la imagen */
-            background-repeat: no-repeat; /* No repite la imagen */
-            background-attachment: fixed; /* La imagen se mantiene fija al hacer scroll */
+            background-image: url('imatges/mountains-1412683_1280.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
         }
 
-        .login-image {
-            width: 100%;  /* La imagen ocupará el 100% del ancho del contenedor */
-            height: auto;  /* La altura será ajustada proporcionalmente */
-            max-width: 200px; /* Limitar la imagen a un tamaño máximo */
-            margin-bottom: 20px; /* Espacio debajo de la imagen */
-            display: block;
-            margin-left: auto;
-            margin-right: auto; /* Centrar la imagen */
-}
-
         .login-container {
-            background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semitransparente */
+            background-color: rgba(255, 255, 255, 0.8);
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 400px; /* Tamaño máximo */
+            max-width: 400px;
             box-sizing: border-box;
         }
 
@@ -81,15 +74,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['usuari'])) {
             box-sizing: border-box;
         }
 
-        .form-input:focus {
-            border-color: #66afe9;
-            outline: none;
-        }
-
         .login-btn {
             width: 100%;
             padding: 10px;
-            background-color:rgb(188, 73, 163);
+            background-color: rgb(188, 73, 163);
             color: white;
             border: none;
             border-radius: 5px;
@@ -101,63 +89,70 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['usuari'])) {
             background-color: #0056b3;
         }
 
-        .register-link {
+        .forgot-password {
             display: block;
             text-align: center;
             margin-top: 10px;
             font-size: 14px;
-        }
-
-        .register-link a {
             color: #007bff;
             text-decoration: none;
         }
 
-        .register-link a:hover {
+        .forgot-password:hover {
             text-decoration: underline;
-        }
-
-        /* Media query para pantallas pequeñas */
-        @media (max-width: 600px) {
-            .login-container {
-                padding: 15px;
-            }
-
-            .login-container h2 {
-                font-size: 1.2em;
-            }
         }
     </style>
 </head>
 <body>
+
     <div class="login-container">
-    <img src="logos/sinfondo.png" alt="Imagen de inicio" class="login-image">
-        <?php 
-        if ($_SESSION['validacio'] == true): ?>
-            <p style="color:Blue;"><?php echo 'Compte validat correctament.' ?></p>
-        <?php
-        else: ?>
-        <p style="color:Red;"><?php echo 'Error en la validació del compte.' ?></p>
-        <?php endif; ?>
+        <img src="logos/sinfondo.png" alt="Imagen de inicio" class="login-image">
         <h2>Iniciar sessió</h2>
         
-        <!-- Mostrar el error si existe -->
-        <?php 
-        if (isset($_GET['error'])): ?>
-            <p style="color:red;"><?php echo $_GET['error'] == 'usuario_no_encontrado' ? 'Registre incorrecte.' : 'Siusplau, completa tots els camps.'; ?></p>
+        <!-- Mostrar errores -->
+        <?php if (isset($_GET['error'])): ?>
+            <p style="color:red;">
+                <?= $_GET['error'] == 'usuario_no_encontrado' ? 'Registre incorrecte.' : 'Siusplau, completa tots els camps.'; ?>
+            </p>
         <?php endif; ?>
-
-        
-        
 
         <form action="existeixuser.php" method="POST">
             <input type="text" name="username" class="form-input" placeholder="Usuari o correu electrònic" required>
             <input type="password" name="password" class="form-input" placeholder="Contrassenya" required>
             <button type="submit" class="login-btn">Iniciar sessió</button>
         </form>
+
+        <a href="#" class="forgot-password" data-bs-toggle="modal" data-bs-target="#resetPasswordModal">
+            Forgot Password?
+        </a>
+        
         <div class="link-registre">
             <p>Encara no tens compte? <a href="register.php">Crea un compte</a></p>
         </div>
     </div>
+
+    <!-- Pop-up Modal para Resetear Contraseña -->
+    <div class="modal fade" id="resetPasswordModal" tabindex="-1" aria-labelledby="resetPasswordModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="resetPasswordModalLabel">Reset Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="resetPasswordSend.php" method="POST">
+                        <label for="resetEmail">Enter your email or username:</label>
+                        <input type="text" id="resetEmail" name="resetEmail" class="form-control" required>
+                        <button type="submit" class="btn btn-primary mt-3">Send Reset Password Email</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
+
