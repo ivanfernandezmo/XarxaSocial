@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-01-2025 a las 15:31:38
+-- Tiempo de generación: 20-02-2025 a las 14:47:58
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -74,8 +74,21 @@ CREATE TABLE `usuario` (
   `creationDate` datetime NOT NULL,
   `removeDate` datetime DEFAULT NULL,
   `lastSignIn` datetime DEFAULT NULL,
-  `active` tinyint(1) DEFAULT NULL
+  `active` tinyint(1) DEFAULT NULL,
+  `activationDate` datetime DEFAULT NULL,
+  `activationCode` char(64) DEFAULT NULL,
+  `resetPassExpiry` datetime DEFAULT NULL,
+  `resetPassCode` char(64) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`idUsuario`, `mail`, `username`, `passHash`, `userFirstName`, `userLastName`, `creationDate`, `removeDate`, `lastSignIn`, `active`, `activationDate`, `activationCode`, `resetPassExpiry`, `resetPassCode`) VALUES
+(1, 'ramon@gmail.com', 'ramon', '123', 'ramon', 'rodriguez', '2025-01-23 15:56:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 'ramon@gmail.com', 'ramon', '123', 'ramon', 'rodriguez', '2025-01-23 15:56:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(14, 'ivan.fernandezm@educem.net', 'ivan', '$2y$12$stgyZcZuM8u84b1FKklu4ud/qvIWkE4KHxzsKr4lTUR7G8ZtORqbK', 'ivan', 'ivan', '2025-02-18 16:00:40', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, '2025-02-18 16:02:14', NULL, NULL, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -129,7 +142,7 @@ ALTER TABLE `post`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Restricciones para tablas volcadas

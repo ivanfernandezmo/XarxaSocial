@@ -37,6 +37,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['usuari'])) {
             margin: 0;
         }
 
+        .login-image {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+        }
+
         body {
             font-family: Arial, sans-serif;
             display: flex;
