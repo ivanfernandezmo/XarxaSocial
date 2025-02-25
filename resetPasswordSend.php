@@ -5,27 +5,28 @@ require_once('connecta_db.php'); // Conectar a la base de datos
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['resetEmail'])) {
     $email = $_POST['resetEmail'];
 
-    // Verificar si el email o username existe en la base de datos
-    $stmt = $db->prepare("SELECT mail FROM usuario WHERE mail = $email");
-    $stmt->bind_param("ss", $email, $email);
+    // Verificar si el email existe en la base de datos
+    $stmt = $db->prepare("SELECT mail FROM usuario WHERE mail = ?");
+    $stmt->bindParam(1, $email, PDO::PARAM_STR); // Utilizamos bindParam para PDO
     $stmt->execute();
-    $stmt->store_result();
 
-    if ($stmt->num_rows > 0) {
+    if ($stmt->rowCount() > 0) {
         // Generar un código único para resetear la contraseña
         $token = bin2hex(random_bytes(50));
-        $data = date('Y-m-d H:i:s')+'30 minutes';
-        $stmt = $db->prepare("UPDATE usuario SET resetPassCode = $token, resetPassExpiry = $data WHERE email = $email");
-        $stmt->bind_param("sss", $token, $email, $email);
+        $data = date('Y-m-d H:i:s', strtotime('+30 minutes')); // Añadido 'strtotime' para sumar 30 minutos
+
+        // Actualizar la base de datos con el token y la fecha de expiración
+        $stmt = $db->prepare("UPDATE usuario SET resetPassCode = ?, resetPassExpiry = ? WHERE mail = ?");
+        $stmt->bindParam(1, $token, PDO::PARAM_STR);
+        $stmt->bindParam(2, $data, PDO::PARAM_STR);
+        $stmt->bindParam(3, $email, PDO::PARAM_STR);
         $stmt->execute();
 
-        // Enviar email con el enlace para resetear la contraseña
-        $resetLink = "http://localhost/XarxaSocial/XarxaSocial/resetPassword.php?token=" . $token."&email=" . $email."&data=" . $data;
-        $_SESSION['resetLink'] = $resetLink;
-        $_SESSION['token'] = $token;
+        $_SESSION['code'] = $token;
         $_SESSION['email'] = $email;
         $_SESSION['data'] = $data;
-        header('Location: mailResetPassword.php');
+
+        header('Location: ./mailing/mailResetPassword.php');
     } else {
         echo "No se encontró ninguna cuenta con este email.";
     }
