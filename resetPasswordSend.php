@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['resetEmail'])) {
 
     if ($stmt->rowCount() > 0) {
         // Generar un código único para resetear la contraseña
-        $token = bin2hex(random_bytes(50));
+        $token = bin2hex(random_bytes(32)); // 32 bytes = 64 chars
         $data = date('Y-m-d H:i:s', strtotime('+30 minutes')); // Añadido 'strtotime' para sumar 30 minutos
 
         // Actualizar la base de datos con el token y la fecha de expiración
