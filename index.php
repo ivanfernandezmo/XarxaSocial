@@ -1,14 +1,16 @@
-<?php require_once('connecta_db.php'); //executem la connexio
+<?php 
+require_once('connecta_db.php'); //executem la connexio
 
 session_start();//iniciem una sessio
-if(isset($_SESSION['usuari'])){
+if(isset($_SESSION['username'])){
     header("Location: home.php");
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' || isset($_SESSION['usuari'])) {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    if (!empty($email) && !empty($password)) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' || isset($_SESSION['username'])) {
+    $email = $_SESSION['email'];
+    $password = $_SESSION['password'];
+    $token = $_SESSION['code'];
+    if (!empty($email) && !empty($token)) {
         $_SESSION['usuari'] = $email;
         $_SESSION['password'] = $password;
         header('Location: mail.php');
