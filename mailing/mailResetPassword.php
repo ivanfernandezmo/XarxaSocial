@@ -21,9 +21,9 @@ if (isset($_SESSION['email'])) {
     $body = '<h1> Petició de canvi de contrasenya</h1>
     <img src="cid:logoArcticTern" alt="Logo Arctic Tern" width="100" height="100">
     <p>Si vols canviar la teva constrasenya fes clic al següent botó:</p>
-    <p> <a href="http://localhost/XarxaSocial/XarxaSocial/resetPassword.php?code='.$codiActivacio.'&email='.$to_email.'">Reinicia la contrasenya</a></p>
+    <p> <a href="http://localhost/XarxaSocial/resetPassword.php?code='.$codiActivacio.'&email='.$to_email.'">Reinicia la contrasenya</a></p>
     <p>Si no has sol·licitat un canvi de contrasenya, ignora aquest correu.</p>';
-    if (!empty($to_email) && !empty($username)) {
+    if (!empty($to_email)&& !empty($username)) {
         $mail = new PHPMailer(true);
         try {
             $mail->IsSMTP();               

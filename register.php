@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'])) {
     $hash = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
     $verifyPassword = $_POST['verifyPassword'];
     
-    $sql_comprobar = 'SELECT * from usuario where username = "'.$username.'" or mail = "'.$email.'"';
+    $sql_comprobar = 'SELECT * from usuario where username = "'.$username.'" and mail = "'.$email.'"';
     $return = $db->query($sql_comprobar);
 
     if($return->rowCount() > 0){
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'])) {
         $_SESSION['activationCode'] = $activationCode;
         $_SESSION['email'] = $email; //$_SESSION['mail']
         $_SESSION['username'] = $username;
-        header("Location: http://localhost/XarxaSocial/XarxaSocial/mailing/mail.php");
+        header("Location: http://localhost/XarxaSocial/mailing/mail.php");
     }
 }
 ?>

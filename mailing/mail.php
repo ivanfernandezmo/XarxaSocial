@@ -22,7 +22,7 @@ if (isset($_SESSION['email'])) {
     <p> Benvingut a Arctic Tern </p>
     <img src="cid:logoArcticTern" alt="Logo Arctic Tern" width="100" height="100">
     <p>Per poder disfrutar de la nostra xarxa social de viatges verifica el teu compte fent clic al següent botó:</p>
-    <p> <a href="http://localhost/Proyecto/XarxaSocial/XarxaSocial/mailCheckAccount.php?code='.$codiActivacio.'&email='.$to_email.'">Activa el teu compte</a></p>
+    <p> <a href="http://localhost/XarxaSocial/mailCheckAccount.php?code='.$codiActivacio.'&email='.$to_email.'">Activa el teu compte</a></p>
     <p>Si no has creat un compte, ignora aquest correu.</p>';
     if (!empty($to_email) && !empty($username)) {
         $mail = new PHPMailer(true);

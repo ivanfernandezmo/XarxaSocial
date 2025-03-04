@@ -3,10 +3,11 @@
     require_once('connecta_db.php');
 
     // Asegúrate de que los datos del formulario sean recibidos
-    if (isset($_POST['username']) && isset($_POST['password'])) {
+    if ((isset($_POST['username']) || isset($_POST['email'])) && isset($_POST['password'])) {
+        //$email = $_POST['email'];
         $usuari = $_POST['username'];
         $password = $_POST['password']; 
-        $sql = 'SELECT passHash FROM usuario where (username = "' . $usuari . '" or mail = "'.$usuari.'") AND active = 1';
+        $sql = 'SELECT passHash FROM usuario where (username = "' . $usuari . '")'; //AND active = 0';
         $return = $db->query($sql);
         $validat = false;
 
@@ -19,7 +20,7 @@
         // Verificar si s'ha tribat l' usuari
         if ($return->rowCount() > 0 AND $validat==true) {
             session_start();
-            $sql_nomUser = 'SELECT username FROM usuario where (username = "' . $usuari . '" or mail = "'.$usuari.'")';
+            $sql_nomUser = 'SELECT username FROM usuario where (username = "' . $usuari . '")';
             $return = $db->query($sql_nomUser);
             foreach($return as $fila){
                 $_SESSION['usuari'] = $fila["username"];
