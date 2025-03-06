@@ -36,7 +36,7 @@ if (isset($_SESSION['email'])) {
             
             $mail->send();
             $text = 'Correu enviat';
-            header('Location: ../index.php');
+            header('Location: ../logout.php');
         } catch (Exception $e) {
             $error = "Error: {$mail->ErrorInfo}";
         }

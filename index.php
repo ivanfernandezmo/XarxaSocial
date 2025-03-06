@@ -6,14 +6,14 @@ if(isset($_SESSION['username'])){
     header("Location: home.php");
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' || isset($_SESSION['username'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' || isset($_SESSION['username']) && !isset($_SESSION['password'])) {
     $email = $_SESSION['email'];
     $password = $_SESSION['password'];
     $token = $_SESSION['code'];
     if (!empty($email) && !empty($token)) {
-        $_SESSION['usuari'] = $email;
+        $_SESSION['username'] = $email;
         $_SESSION['password'] = $password;
-        header('Location: mail.php');
+        header('Location: home.php');
         exit();
     } else {
         $error = 'Escriu la informació:';

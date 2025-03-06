@@ -23,7 +23,7 @@
             $sql_nomUser = 'SELECT username FROM usuario where (username = "' . $usuari . '")';
             $return = $db->query($sql_nomUser);
             foreach($return as $fila){
-                $_SESSION['usuari'] = $fila["username"];
+                $_SESSION['username'] = $fila["username"];
             }
             $_SESSION['password'] = $password;
             header("Location: home.php");

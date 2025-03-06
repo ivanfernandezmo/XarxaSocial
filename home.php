@@ -2,7 +2,7 @@
     session_start();
 
     // si no hi ha usuari o password redirigim al login
-    if (!isset($_SESSION['usuari']) || !isset($_SESSION['password'])) {
+    if (!isset($_SESSION['username']) || !isset($_SESSION['password'])) {
         header("Location: index.php");
         exit();
     }
@@ -61,7 +61,7 @@
 <body>
 
 <div class="welcome-container">
-    <h1>Benvingut, <?php echo $_SESSION['usuari']; ?>!</h1>
+    <h1>Benvingut, <?php echo $_SESSION['username']; ?>!</h1>
     <p>Estàs autenticat correctament.</p>
     
 </div>

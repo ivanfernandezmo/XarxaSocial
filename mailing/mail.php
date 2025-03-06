@@ -124,7 +124,7 @@ if (isset($_SESSION['email'])) {
     <?php if ($text): ?>
         <p style="color: green;"><?= htmlspecialchars($text) ?></p>
     <?php endif; ?>
-    <form action = "../index.php">
+    <form action = "../logout.php">
         <p>S'ha enviat el correu de verificació al teu mail.</p>
         <button type="submit" name="send_mail">Tornar a la pàgina principal</button>
     </form>

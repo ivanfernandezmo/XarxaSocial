@@ -60,7 +60,7 @@ if (isset($_SESSION['email'])) {
     <title>INICI</title>
 </head>
 <body>
-    <form action = "../index.php">
+    <form action = "../logout.php">
         <p>Hem enviat un correu amb instruccions per resetejar la teva contrassenya.</p>
         <button type="submit" name="send_mail">Tornar a la pàgina principal</button>
     </form>

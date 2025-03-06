@@ -18,6 +18,7 @@ if (isset($_GET['code']) && isset($_GET['email'])&& $_SERVER['REQUEST_METHOD'] =
 
     // Si s'envia el formulari
     if (strtotime($_SESSION['data']) > time() && $_SERVER['REQUEST_METHOD'] == 'POST') {
+        $email = $_SESSION['email'];
         $password = $_POST['new_password'];
         $confirmPassword = $_POST['confirm_password'];
 
