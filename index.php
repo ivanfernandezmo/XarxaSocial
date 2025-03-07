@@ -31,86 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || isset($_SESSION['username']) && !iss
 
     <!-- Bootstrap CSS para el Pop-up -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <style>
-        /* Estilos generales */
-        html, body {
-            height: 100%;
-            margin: 0;
-        }
-
-        .login-image {
-            display: block;
-            margin: 0 auto;
-            max-width: 100%;
-            height: auto;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-image: url('imatges/mountains-1412683_1280.webp');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
-
-        .login-container {
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-            box-sizing: border-box;
-        }
-
-        .login-container h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 1.5em;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-        }
-
-        .login-btn {
-            width: 100%;
-            padding: 10px;
-            background-color: rgb(188, 73, 163);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .login-btn:hover {
-            background-color: #0056b3;
-        }
-
-        .forgot-password {
-            display: block;
-            text-align: center;
-            margin-top: 10px;
-            font-size: 14px;
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        .forgot-password:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <link rel="stylesheet" href="./estilosCSS/index.css">
+    
 </head>
 <body>
 

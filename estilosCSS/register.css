@@ -1,0 +1,124 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    
+}
+
+/* Contenedor de la izquierda (formulario) */
+.form-container {
+    flex: 1;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding: 20px;
+    background-color: #f4ddcb;
+}
+
+/* Contenedor del formulario de registro */
+.register-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f4f4f4;
+}
+
+.register-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.form-input:focus {
+    border-color: #66afe9;
+    outline: none;
+}
+
+.register-btn {
+    width: 100%;
+    padding: 10px;
+    background-color:rgb(188, 73, 163);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.register-btn:hover {
+    background-color: #0056b3;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.login-link a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+}
+
+.success {
+    color: green;
+    font-size: 14px;
+}
+
+/* Contenedor de la derecha (imagen) */
+.image-container {
+    flex: 1;
+    background-image: url('imatges/sign-post-5655110_1280.webp'); /* Ruta de la imagen */
+    background-size: contain;
+    background-position: left;
+    background-repeat: no-repeat;
+    background-color: #f4ddcb;
+    height: 100vh; /* Asegura que ocupe toda la altura de la ventana */
+}
+
+/* En el caso de pantallas pequeñas, apilamos los elementos verticalmente */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    .form-container, .image-container {
+        flex: none;
+        width: 100%;
+        height: 50%;
+    }
+
+    .register-container {
+        padding: 15px;
+    }
+}
