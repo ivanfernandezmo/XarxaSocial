@@ -185,3 +185,6 @@ CREATE TABLE `xarxasocial`.`perfil` (
   ON DELETE CASCADE 
   ON UPDATE CASCADE ) 
 ENGINE = InnoDB;
+
+--INSERT EN PERFIL
+INSERT INTO `perfil` (`idUsuario`, `imatge`, `descripcio`, `ubicacio`, `edat`) VALUES ('15', '../imatges/perfil-pato.jpg', 'Apasionada por la tecnología y el diseño. 🚀 Amante del café y los viajes. ✈️', 'Barcelona, España', '32');
