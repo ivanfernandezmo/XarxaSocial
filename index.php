@@ -52,6 +52,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || isset($_SESSION['username']) && !iss
             <input type="password" name="password" class="form-input" placeholder="Contrassenya" required>
             <button type="submit" class="login-btn">Iniciar sessió</button>
         </form>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-image: url('imatges/mountains-1412683_1280.webp');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+            }
+        </style>
 
         <a href="#" class="forgot-password" data-bs-toggle="modal" data-bs-target="#resetPasswordModal">
             Forgot Password?
