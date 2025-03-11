@@ -188,3 +188,7 @@ ENGINE = InnoDB;
 
 --INSERT EN PERFIL
 INSERT INTO `perfil` (`idUsuario`, `imatge`, `descripcio`, `ubicacio`, `edat`) VALUES ('15', '../imatges/perfil-pato.jpg', 'Apasionada por la tecnología y el diseño. 🚀 Amante del café y los viajes. ✈️', 'Barcelona, España', '32');
+
+--INSERT EN POST
+INSERT INTO `post` (`titulo`, `descripcion`, `foto`, `idUsuario`) VALUES ('Mi Viaje a Japón', 'Explorando la cultura y gastronomía japonesa. 🍣🏯', '../imatges/posts/japon.jpg', '15');
+INSERT INTO `post` (`titulo`, `descripcion`, `foto`, `idUsuario`) VALUES ('Aventuras en la montaña', 'Senderismo y vistas increíbles en los Alpes. ⛰️', '../imatges/posts/montana.jpg', '15');

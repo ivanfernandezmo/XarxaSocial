@@ -48,6 +48,16 @@ else
 
 
     //AGAFAR ULTIMES PUBLICACIONS (taula posts)
+    //HACER UN INNER JOIN CON magrada PARA PODER TENER LOS LIKES DEL POST Y MOSTRARLOS!!!!?!?!?!?!??!?!!?!??!?!
+    $sql_dadesPosts = 'SELECT titulo, descripcion, foto FROM post where (idUsuario = ' . $id . ')';
+    $result = $db->query($sql_dadesPosts);
+    $i = 0;
+    $post = null;
+    foreach($result as $post){
+        $posts[$i] = ["titulo" => $post["titulo"], "imagen" => $post["foto"], "descripcion" => $post["descripcion"]];
+        $i++;
+    }
+
 }
 ?>
 
@@ -88,18 +98,26 @@ else
             </a>
         </div>
 
-        <!-- POSTS -->
-        <div class="mt-6">
+                <!-- POSTS MEJORADOS -->
+                <div class="mt-6">
             <h3 class="text-lg font-semibold mb-3">Publicaciones destacadas</h3>
-            <div class="space-y-3">
-                <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
-                    <p class="text-gray-800">"Hoy aprendí algo nuevo sobre desarrollo web. 💻 #CodingLife"</p>
-                </div>
-                <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
-                    <p class="text-gray-800">"Explorando nuevas ciudades y conociendo culturas. 🌍"</p>
-                </div>
+            <div class="space-y-4">
+                <?php
+                foreach ($posts as $post) { ?>
+                    <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
+                        <h4 class="text-lg font-bold"><?php echo $post['titulo']; ?></h4>
+                        <img src="<?php echo $post['imagen']; ?>" alt="Imagen del post" class="w-full h-40 object-cover rounded-lg mt-2">
+                        <p class="text-gray-800 mt-2"><?php echo $post['descripcion']; ?></p>
+                        <div class="flex items-center justify-between mt-3">
+                            <button class="like-btn flex items-center text-red-500 hover:text-red-700">
+                                ❤️ <span class="ml-1">20</span> 
+                            </button>
+                        </div>
+                    </div>
+                <?php } ?>
             </div>
         </div>
+    </div>
     </div>
 </body>
 </html>
