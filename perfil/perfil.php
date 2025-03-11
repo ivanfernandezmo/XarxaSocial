@@ -13,7 +13,7 @@ else
     $return = $db->query($sql_nomUser);
     foreach($return as $fila){
         $nom = $fila["userFirstName"];
-        $cognoms = $fila["userFirstName"];
+        $cognoms = $fila["userLastName"];
         $id = $fila["idUsuario"];
     }
     //CONTROLAR QUE nom y cognom no estan vacios
