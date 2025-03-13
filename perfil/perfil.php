@@ -15,6 +15,7 @@ else
         $nom = $fila["userFirstName"];
         $cognoms = $fila["userLastName"];
         $id = $fila["idUsuario"];
+        $_SESSION['idUsuario'] = $id;
     }
     //CONTROLAR QUE nom y cognom no estan vacios
 
