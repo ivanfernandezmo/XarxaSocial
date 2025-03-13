@@ -37,24 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt2->execute([$nuevaUbicacio, $nuevaEdat, $nuevaDescripcio, $_SESSION['idUsuario']]);
 
     // Actualizamos la foto si se sube una nueva
-    if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
-        // Ruta donde se guardarán las imágenes
-        $uploadDir = "../imatges/"; 
-        // Obtener la extensión del archivo de la imagen
-        $imageExtension = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
-        // Generar un nombre único para la imagen
-        $newImageName = 'perfil_' . time() . '.' . $imageExtension;
-        // Ruta completa donde se guardará la nueva imagen
-        $newImagePath = $uploadDir . $newImageName;
-
-        // Mover el archivo subido al directorio adecuado
-        if (move_uploaded_file($_FILES['foto']['tmp_name'], $newImagePath)) {
-            // Si la imagen se sube correctamente, actualizamos la variable $foto
-            $foto = $newImagePath;
-        } else {
-            // Si la imagen no se puede mover, mantenemos la foto actual
-            $foto = $foto_actual;  // Mantenemos la foto anterior en la variable $foto
-        }
+    if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) 
+    {
+        $foto = "../imatges/" . $_FILES['foto']['name'];
     } else {
         // Si no se ha subido una nueva foto, mantenemos la foto actual
         $foto = $foto_actual;  // Mantenemos la foto actual en la variable $foto
