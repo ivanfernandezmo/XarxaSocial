@@ -14,9 +14,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Procesar imagen
     $foto = null;
+
     if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
-        $foto = '../imatges/posts/'.$_FILES['foto']['name'];
+        $uploadDir = "../imatges/posts/";
+        $imageExtension = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
+        $newImageName = 'post_' . time() . '.' . $imageExtension;
+        $newImagePath = $uploadDir . $newImageName;
+
+        if (move_uploaded_file($_FILES['foto']['tmp_name'], $newImagePath)) {
+            $foto = $newImagePath;
+        }
     }
+
 
     // Insertar post en la base de datos
     $sql_insert_post = "INSERT INTO post (idUsuario, titulo, descripcion, foto) VALUES (?, ?, ?, ?)";

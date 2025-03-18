@@ -192,3 +192,13 @@ INSERT INTO `perfil` (`idUsuario`, `imatge`, `descripcio`, `ubicacio`, `edat`) V
 --INSERT EN POST
 INSERT INTO `post` (`titulo`, `descripcion`, `foto`, `idUsuario`) VALUES ('Mi Viaje a Japón', 'Explorando la cultura y gastronomía japonesa. 🍣🏯', '../imatges/posts/japon.jpg', '15');
 INSERT INTO `post` (`titulo`, `descripcion`, `foto`, `idUsuario`) VALUES ('Aventuras en la montaña', 'Senderismo y vistas increíbles en los Alpes. ⛰️', '../imatges/posts/montana.jpg', '15');
+
+INSERT INTO post (idUsuario, titulo, descripcion, foto) VALUES
+(15, '🌅 Amanecer en Santorini', 'Disfrutando de un amanecer mágico en Santorini. 🌊 Nada como ver el sol salir sobre el mar Egeo. 🇬🇷✨', '../imatges/posts/santorini.jpg'),
+(15, '⛩️ Explorando Kyoto', '🏯 Templos ancestrales, 🌸 cerezos en flor y una cultura fascinante. Kyoto es un destino imperdible. 🍣🇯🇵', '../imatges/posts/kyoto.jpg'),
+(15, '🚗 Roadtrip por la Costa Amalfitana', '🌊 Carreteras serpenteantes, 🍕 la mejor pizza de Italia y vistas impresionantes. ¡Qué viaje inolvidable! 🇮🇹☀️', '../imatges/posts/amalfi.jpg'),
+(15, '🏔️ Aventura en Machu Picchu', 'Después de una caminata agotadora 🥾, la vista de Machu Picchu lo vale todo. 🏛️ Historia y naturaleza en un solo lugar. 🇵🇪', '../imatges/posts/machu_picchu.jpg'),
+(15, '🦁 Safari en Kenia', 'Leones, jirafas y atardeceres de película 🌅. África tiene una magia indescriptible. 🦓🌍', '../imatges/posts/safari_kenya.jpg'),
+(15, '🎈 Paseo en globo en Capadocia', 'Ver las chimeneas de hadas desde el cielo es una experiencia única. 🏜️ Turquía nunca decepciona. 🇹🇷', '../imatges/posts/capadocia.jpg'),
+(15, '🤿 Buceo en la Gran Barrera de Coral', '🌊 Colores vibrantes, 🐠 peces exóticos y la sensación de estar en otro mundo bajo el agua. 🇦🇺', '../imatges/posts/coral.jpg'),
+(15, '🎄 Navidad en Nueva York', '❄️ Luces, nieve y un espíritu navideño inigualable. 🏙️ Nueva York en diciembre es pura magia. 🇺🇸', '../imatges/posts/ny.jpg');

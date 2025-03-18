@@ -39,11 +39,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Actualizamos la foto si se sube una nueva
     if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) 
     {
-        $foto = "../imatges/" . $_FILES['foto']['name'];
+        $uploadDir = "../imatges/perfils/";
+        $imageExtension = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
+        $newImageName = 'perfil_' . $_SESSION['idUsuario'] . '.' . $imageExtension;
+        $newImagePath = $uploadDir . $newImageName;
+        if (move_uploaded_file($_FILES['foto']['tmp_name'], $newImagePath)) {
+            $foto = $newImagePath;
+        }
     } else {
         // Si no se ha subido una nueva foto, mantenemos la foto actual
         $foto = $foto_actual;  // Mantenemos la foto actual en la variable $foto
     }
+
 
     // Actualizamos la ruta de la foto en la base de datos
     $sql_update_foto = 'UPDATE perfil SET imatge = ? WHERE idUsuario = ?';
