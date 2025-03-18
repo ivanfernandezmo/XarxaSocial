@@ -5,9 +5,7 @@ session_start();
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
-}
-else
-{
+} else {
     //AGAFAR NOM I COGNOM
     $sql_nomUser = 'SELECT userFirstName, userLastName, idUsuario FROM usuario where (username = "' . $_SESSION['username'] . '")';
     $return = $db->query($sql_nomUser);
@@ -17,13 +15,8 @@ else
         $id = $fila["idUsuario"];
         $_SESSION['idUsuario'] = $id;
     }
-    //CONTROLAR QUE nom y cognom no estan vacios
 
-    //AGAFAR FOTO DE PERFIL (taula perfil)
-    //AGAFAR DESCRIPCIO (taula perfil)
-    //AGAFAR UBICACIÓ (taula perfil)
-    //AGAFAR EDAT (taula perfil)
-
+    //AGAFAR FOTO DE PERFIL
     $sql_dadesPerfil = 'SELECT imatge, descripcio, ubicacio, edat FROM perfil where (idUsuario = ' . $id . ')';
     $result = $db->query($sql_dadesPerfil);
     foreach($result as $row){
@@ -47,18 +40,17 @@ else
         $edat = "No hi ha cap edat";
     }
 
-
-    //AGAFAR ULTIMES PUBLICACIONS (taula posts)
-    //HACER UN INNER JOIN CON magrada PARA PODER TENER LOS LIKES DEL POST Y MOSTRARLOS!!!!?!?!?!?!??!?!!?!??!?!
+    // AGAFAR ULTIMES PUBLICACIONS
     $sql_dadesPosts = 'SELECT titulo, descripcion, foto FROM post where (idUsuario = ' . $id . ')';
     $result = $db->query($sql_dadesPosts);
+    
+    // Inicializar el array de posts
+    $posts = [];
     $i = 0;
-    $post = null;
     foreach($result as $post){
         $posts[$i] = ["titulo" => $post["titulo"], "imagen" => $post["foto"], "descripcion" => $post["descripcion"]];
         $i++;
     }
-
 }
 ?>
 
@@ -99,27 +91,30 @@ else
             </a>
         </div>
 
-                <!-- POSTS MEJORADOS -->
-                <div class="mt-6">
+        <!-- POSTS MEJORADOS -->
+        <div class="mt-6">
             <h3 class="text-lg font-semibold mb-3">Publicaciones destacadas</h3>
             <div class="space-y-4">
                 <?php
-                foreach ($posts as $post) { ?>
-                    <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
-                        <h4 class="text-lg font-bold"><?php echo $post['titulo']; ?></h4>
-                        <img src="<?php echo $post['imagen']; ?>" alt="Imagen del post" class="w-full h-40 object-cover rounded-lg mt-2">
-                        <p class="text-gray-800 mt-2"><?php echo $post['descripcion']; ?></p>
-                        <div class="flex items-center justify-between mt-3">
-                            <button class="like-btn flex items-center text-red-500 hover:text-red-700">
-                                ❤️ <span class="ml-1">20</span> 
-                            </button>
+                if (!empty($posts)) {
+                    foreach ($posts as $post) { ?>
+                        <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
+                            <h4 class="text-lg font-bold"><?php echo $post['titulo']; ?></h4>
+                            <img src="<?php echo $post['imagen']; ?>" alt="Imagen del post" class="w-full h-40 object-cover rounded-lg mt-2">
+                            <p class="text-gray-800 mt-2"><?php echo $post['descripcion']; ?></p>
+                            <div class="flex items-center justify-between mt-3">
+                                <button class="like-btn flex items-center text-red-500 hover:text-red-700">
+                                    ❤️ <span class="ml-1">20</span> 
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                <?php } ?>
+                    <?php }
+                } else {
+                    echo "<p>No tienes publicaciones para mostrar.</p>";
+                }
+                ?>
             </div>
         </div>
     </div>
-    </div>
 </body>
 </html>
-
