@@ -202,3 +202,7 @@ INSERT INTO post (idUsuario, titulo, descripcion, foto) VALUES
 (15, '🎈 Paseo en globo en Capadocia', 'Ver las chimeneas de hadas desde el cielo es una experiencia única. 🏜️ Turquía nunca decepciona. 🇹🇷', '../imatges/posts/capadocia.jpg'),
 (15, '🤿 Buceo en la Gran Barrera de Coral', '🌊 Colores vibrantes, 🐠 peces exóticos y la sensación de estar en otro mundo bajo el agua. 🇦🇺', '../imatges/posts/coral.jpg'),
 (15, '🎄 Navidad en Nueva York', '❄️ Luces, nieve y un espíritu navideño inigualable. 🏙️ Nueva York en diciembre es pura magia. 🇺🇸', '../imatges/posts/ny.jpg');
+
+--Modificació taula Post per afegir camp Fecha_publicacion
+
+ALTER TABLE post ADD COLUMN fecha_publicacion DATE;

@@ -28,9 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     // Insertar post en la base de datos
-    $sql_insert_post = "INSERT INTO post (idUsuario, titulo, descripcion, foto) VALUES (?, ?, ?, ?)";
+    $sql_insert_post = "INSERT INTO post (idUsuario, titulo, descripcion, foto, fecha_publicacion) VALUES (?, ?, ?, ?,?)";
     $stmt = $db->prepare($sql_insert_post);
-    $stmt->execute([$idUsuario, $titulo, $descripcion, $foto]);
+    $stmt->execute([$idUsuario, $titulo, $descripcion, $foto, date("Y/m/d")]);
 
     header("Location: perfil.php");
     exit();

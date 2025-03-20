@@ -41,16 +41,24 @@ if (!isset($_SESSION['username'])) {
     }
 
     // AGAFAR ULTIMES PUBLICACIONS
-    $sql_dadesPosts = 'SELECT titulo, descripcion, foto FROM post where (idUsuario = ' . $id . ')';
+    $sql_dadesPosts = 'SELECT idPost,titulo, descripcion, foto, fecha_publicacion FROM post where (idUsuario = ' . $id . ')';
     $result = $db->query($sql_dadesPosts);
     
     // Inicializar el array de posts
     $posts = [];
     $i = 0;
     foreach($result as $post){
-        $posts[$i] = ["titulo" => $post["titulo"], "imagen" => $post["foto"], "descripcion" => $post["descripcion"]];
+        $sql_dadesLikes = 'SELECT count(*) FROM magrada where (idPost = ' . $post["idPost"] . ')';
+        $likes = $db->query($sql_dadesLikes);
+        foreach($likes as $qtt){
+            $like = $qtt["count(*)"];
+        }
+
+        $posts[$i] = ["titulo" => $post["titulo"], "imagen" => $post["foto"], "descripcion" => $post["descripcion"],"fecha_publicacion" => $post["fecha_publicacion"],"likes"=>$like];
         $i++;
     }
+
+
 }
 ?>
 
@@ -104,8 +112,9 @@ if (!isset($_SESSION['username'])) {
                             <p class="text-gray-800 mt-2"><?php echo $post['descripcion']; ?></p>
                             <div class="flex items-center justify-between mt-3">
                                 <button class="like-btn flex items-center text-red-500 hover:text-red-700">
-                                    ❤️ <span class="ml-1">20</span> 
+                                    ❤️ <span class="ml-1"><?php echo $post['likes']; ?></span> 
                                 </button>
+                                <p><?php echo $post['fecha_publicacion']; ?></p>
                             </div>
                         </div>
                     <?php }
