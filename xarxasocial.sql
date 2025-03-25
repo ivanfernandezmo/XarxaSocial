@@ -206,3 +206,6 @@ INSERT INTO post (idUsuario, titulo, descripcion, foto) VALUES
 --Modificació taula Post per afegir camp Fecha_publicacion
 
 ALTER TABLE post ADD COLUMN fecha_publicacion DATE;
+
+-- INSERTS A MAGRADA
+INSERT INTO `magrada` (`idUsuario`, `idPost`) VALUES ('15', '3'), ('15', '2');

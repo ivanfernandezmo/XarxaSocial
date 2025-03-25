@@ -54,7 +54,7 @@ if (!isset($_SESSION['username'])) {
             $like = $qtt["count(*)"];
         }
 
-        $posts[$i] = ["titulo" => $post["titulo"], "imagen" => $post["foto"], "descripcion" => $post["descripcion"],"fecha_publicacion" => $post["fecha_publicacion"],"likes"=>$like];
+        $posts[$i] = ["idPost" => $post["idPost"], "titulo" => $post["titulo"], "imagen" => $post["foto"], "descripcion" => $post["descripcion"],"fecha_publicacion" => $post["fecha_publicacion"],"likes"=>$like];
         $i++;
     }
 
@@ -111,7 +111,7 @@ if (!isset($_SESSION['username'])) {
                             <img src="<?php echo $post['imagen']; ?>" alt="Imagen del post" class="w-full h-40 object-cover rounded-lg mt-2">
                             <p class="text-gray-800 mt-2"><?php echo $post['descripcion']; ?></p>
                             <div class="flex items-center justify-between mt-3">
-                                <button class="like-btn flex items-center text-red-500 hover:text-red-700">
+                                <button href="fer_like.php?idPost=<?php echo $post['idPost']; ?>" class="like-btn flex items-center text-red-500 hover:text-red-700">
                                     ❤️ <span class="ml-1"><?php echo $post['likes']; ?></span> 
                                 </button>
                                 <p><?php echo $post['fecha_publicacion']; ?></p>
