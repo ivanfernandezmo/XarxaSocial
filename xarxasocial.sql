@@ -209,3 +209,10 @@ ALTER TABLE post ADD COLUMN fecha_publicacion DATE;
 
 -- INSERTS A MAGRADA
 INSERT INTO `magrada` (`idUsuario`, `idPost`) VALUES ('15', '3'), ('15', '2');
+
+-- CONSULTA PER ORDENAR POSTS SEGONS LIKES
+SELECT P.idPost, P.titulo, P.descripcion, P.foto, P.fecha_publicacion, COUNT(*) AS total_likes FROM magrada M 
+	            RIGHT JOIN post P ON M.idPost = P.idPost
+            WHERE P.idUsuario = ' . $id . '
+            GROUP BY P.idPost
+            ORDER BY total_likes DESC;

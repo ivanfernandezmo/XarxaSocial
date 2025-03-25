@@ -40,21 +40,24 @@ if (!isset($_SESSION['username'])) {
         $edat = "No hi ha cap edat";
     }
 
-    // AGAFAR ULTIMES PUBLICACIONS
-    $sql_dadesPosts = 'SELECT idPost,titulo, descripcion, foto, fecha_publicacion FROM post where (idUsuario = ' . $id . ')';
+
+    
+
+    // AGAFAR ULTIMES PUBLICACIONS PER QTT de LIKES
+    $sql_dadesPosts = "SELECT P.idPost, P.titulo, P.descripcion, P.foto, P.fecha_publicacion, COUNT(M.idPost) AS total_likes FROM magrada M 
+	            RIGHT JOIN post P ON M.idPost = P.idPost
+            WHERE P.idUsuario = $id
+            GROUP BY P.idPost
+            ORDER BY total_likes DESC";
     $result = $db->query($sql_dadesPosts);
     
     // Inicializar el array de posts
     $posts = [];
     $i = 0;
     foreach($result as $post){
-        $sql_dadesLikes = 'SELECT count(*) FROM magrada where (idPost = ' . $post["idPost"] . ')';
-        $likes = $db->query($sql_dadesLikes);
-        foreach($likes as $qtt){
-            $like = $qtt["count(*)"];
-        }
+        
 
-        $posts[$i] = ["idPost" => $post["idPost"], "titulo" => $post["titulo"], "imagen" => $post["foto"], "descripcion" => $post["descripcion"],"fecha_publicacion" => $post["fecha_publicacion"],"likes"=>$like];
+        $posts[$i] = ["idPost" => $post["idPost"], "titulo" => $post["titulo"], "imagen" => $post["foto"], "descripcion" => $post["descripcion"],"fecha_publicacion" => $post["fecha_publicacion"],"likes"=>$post["total_likes"]];
         $i++;
     }
 
@@ -111,9 +114,9 @@ if (!isset($_SESSION['username'])) {
                             <img src="<?php echo $post['imagen']; ?>" alt="Imagen del post" class="w-full h-40 object-cover rounded-lg mt-2">
                             <p class="text-gray-800 mt-2"><?php echo $post['descripcion']; ?></p>
                             <div class="flex items-center justify-between mt-3">
-                                <button href="fer_like.php?idPost=<?php echo $post['idPost']; ?>" class="like-btn flex items-center text-red-500 hover:text-red-700">
+                                <a href="fer_like.php?idPost=<?php echo $post['idPost']; ?>" class="like-btn flex items-center text-red-500 hover:text-red-700">
                                     ❤️ <span class="ml-1"><?php echo $post['likes']; ?></span> 
-                                </button>
+                                </a>
                                 <p><?php echo $post['fecha_publicacion']; ?></p>
                             </div>
                         </div>
