@@ -133,9 +133,9 @@ if (!isset($_SESSION['username'])) {
                                 </a>
                                 <p><?php echo $post['fecha_publicacion']; ?></p>
                             </div>
-                            <?php if (!empty($post['comentaris'])) { ?>
                                 <div class="mt-4 p-3 bg-white rounded-lg shadow-sm">
                                     <h5 class="font-semibold text-gray-700">Comentaris:</h5>
+                                    <?php if (!empty($post['comentaris'])) { ?>
                                     <?php foreach ($post['comentaris'] as $comentari) { ?>
                                         <div class="border-t border-gray-200 mt-2 pt-2">
                                             <p class="text-sm text-gray-600">
@@ -144,6 +144,7 @@ if (!isset($_SESSION['username'])) {
                                             </p>
                                             <p class="text-gray-900"><?php echo $comentari['text']; ?></p>
                                         </div>
+                                    <?php } ?>
                                     <?php } ?>
                                     <div class="mt-4">
                                         <form action="afegir_comentari.php" method="POST" class="flex flex-col bg-gray-50 p-3 rounded-lg shadow-sm">
@@ -155,7 +156,6 @@ if (!isset($_SESSION['username'])) {
                                         </form>
                                     </div>
                                 </div>
-                            <?php } ?>
                         </div>
                     <?php }
                 } else {
