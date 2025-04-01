@@ -45,20 +45,34 @@ if (!isset($_SESSION['username'])) {
 
     // AGAFAR ULTIMES PUBLICACIONS PER QTT de LIKES
     $sql_dadesPosts = "SELECT P.idPost, P.titulo, P.descripcion, P.foto, P.fecha_publicacion, COUNT(M.idPost) AS total_likes FROM magrada M 
-	            RIGHT JOIN post P ON M.idPost = P.idPost
-            WHERE P.idUsuario = $id
-            GROUP BY P.idPost
-            ORDER BY total_likes DESC";
+                        RIGHT JOIN post P ON M.idPost = P.idPost
+                        WHERE P.idUsuario = $id
+                        GROUP BY P.idPost
+                        ORDER BY total_likes DESC";
     $result = $db->query($sql_dadesPosts);
     
     // Inicializar el array de posts
     $posts = [];
     $i = 0;
     foreach($result as $post){
-        
 
-        $posts[$i] = ["idPost" => $post["idPost"], "titulo" => $post["titulo"], "imagen" => $post["foto"], "descripcion" => $post["descripcion"],"fecha_publicacion" => $post["fecha_publicacion"],"likes"=>$post["total_likes"]];
+        $comentaris = [];
+        $sql_comentaris = "SELECT C.dataComentari, C.text, U.username FROM comentari C
+                            INNER JOIN usuario U ON C.idUsuario = U.idUsuario
+                            WHERE C.idPost = " . $post["idPost"] . "
+                            ORDER BY C.dataComentari DESC";
+        $coment = $db->query($sql_comentaris);
+        $j = 0;
+
+        foreach($coment as $comentari)
+        {
+            $comentaris[$j] = ["dataComentari" => $comentari["dataComentari"], "text" => $comentari["text"], "username" => $comentari["username"]];
+            $j++;
+        }
+
+        $posts[$i] = ["idPost" => $post["idPost"], "titulo" => $post["titulo"], "imagen" => $post["foto"], "descripcion" => $post["descripcion"],"fecha_publicacion" => $post["fecha_publicacion"],"likes"=>$post["total_likes"], "comentaris"=>$comentaris];
         $i++;
+
     }
 
 
@@ -119,6 +133,29 @@ if (!isset($_SESSION['username'])) {
                                 </a>
                                 <p><?php echo $post['fecha_publicacion']; ?></p>
                             </div>
+                            <?php if (!empty($post['comentaris'])) { ?>
+                                <div class="mt-4 p-3 bg-white rounded-lg shadow-sm">
+                                    <h5 class="font-semibold text-gray-700">Comentaris:</h5>
+                                    <?php foreach ($post['comentaris'] as $comentari) { ?>
+                                        <div class="border-t border-gray-200 mt-2 pt-2">
+                                            <p class="text-sm text-gray-600">
+                                                <span class="font-semibold text-gray-800"><?php echo $comentari['username']; ?></span> 
+                                                (<?php echo date('d/m/Y H:i', strtotime($comentari['dataComentari'])); ?>):
+                                            </p>
+                                            <p class="text-gray-900"><?php echo $comentari['text']; ?></p>
+                                        </div>
+                                    <?php } ?>
+                                    <div class="mt-4">
+                                        <form action="afegir_comentari.php" method="POST" class="flex flex-col bg-gray-50 p-3 rounded-lg shadow-sm">
+                                            <input type="hidden" name="idPost" value="<?php echo $post['idPost']; ?>">
+                                            <textarea name="text" placeholder="Escriu el teu comentari..." required class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                                            <button type="submit" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
+                                                Afegir comentari
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            <?php } ?>
                         </div>
                     <?php }
                 } else {

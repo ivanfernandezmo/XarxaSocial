@@ -216,3 +216,27 @@ SELECT P.idPost, P.titulo, P.descripcion, P.foto, P.fecha_publicacion, COUNT(*) 
             WHERE P.idUsuario = ' . $id . '
             GROUP BY P.idPost
             ORDER BY total_likes DESC;
+
+-- CREACIÓ TAULA COMENTARI
+CREATE TABLE `xarxasocial`.`comentari` ( 
+  `idPost` INT NOT NULL,
+  `idUsuario` INT NOT NULL,
+  `dataComentari` DATETIME NOT NULL,
+  `text` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`idUsuario`, `dataComentari`, `idPost`),
+  CONSTRAINT `fk_comentaris_post` FOREIGN KEY (`idPost`) REFERENCES `post`(`idPost`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_comentaris_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario`(`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE 
+) ENGINE = InnoDB;
+
+-- INSERTS A COMENTARI
+INSERT INTO `xarxasocial`.`comentari` (`idPost`, `idUsuario`, `dataComentari`, `text`) VALUES
+(2, 1, '2025-03-21 10:15:00', '🇯🇵 ¡Qué hermoso viaje! Japón debe ser increíble. 🍣🏯'),
+(2, 2, '2025-03-21 12:30:00', '🍜 Me encantaría probar la gastronomía japonesa. 😋'),
+(7, 15, '2025-03-21 14:45:00', '🌸 Explorar Kyoto debe ser mágico en primavera. 🏮'),
+(8, 20, '2025-03-21 16:00:00', '🚗 Siempre he querido hacer un roadtrip por Italia. 🍕'),
+(9, 1, '2025-03-21 18:20:00', '⛰️ Machu Picchu es un destino soñado. ¡Gran foto! 📸'),
+(10, 2, '2025-03-21 20:00:00', '🦒 Safari en Kenia, una experiencia única en la vida. 🌅'),
+(11, 15, '2025-03-21 21:10:00', '🎈 Paseo en globo en Capadocia, ¡una vista impresionante! ☁️'),
+(12, 20, '2025-03-21 22:30:00', '🐠 Bucear en la Gran Barrera de Coral debe ser asombroso. 🌊'),
+(13, 1, '2025-03-21 23:45:00', '❄️ Navidad en Nueva York es un sueño. 🎄🗽'),
+(13, 2, '2025-03-22 00:10:00', '✨ Las luces y la nieve hacen que NY sea mágico en diciembre. 🏙️');

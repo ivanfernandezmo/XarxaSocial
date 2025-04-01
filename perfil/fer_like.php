@@ -21,16 +21,12 @@
             $sql = "INSERT INTO magrada (idPost, idUsuario) VALUES ($idPost, $idUsuario)";
             $db->exec($sql);
         }
-        else //si existeis fem un delete
+        else //si existeix fem un delete
         {
             $sql = "DELETE FROM magrada WHERE idPost = $idPost AND idUsuario = $idUsuario";
             $db->exec($sql);
         }
         
-
-        
-
-
         header("Location: perfil.php");
     }
 ?>
